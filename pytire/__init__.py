@@ -6,4 +6,4 @@
 
 from .tire import Tire
 
-__all__ = [Tire]
+__all__ = ["Tire"]

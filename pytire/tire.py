@@ -5,12 +5,12 @@
 """
 
 import re
-from .enums import Unit
+
 from .constant import METRIC_RE
+from .enums import Unit
 
 
 class Tire:
     def __init__(self, size: str):
         self.size = size
         self.unit = Unit.METRIC if re.match(METRIC_RE, self.size) else Unit.IMPERIAL
-
