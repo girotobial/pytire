@@ -205,6 +205,17 @@ flake8 = ">=3.0,<3.2.0 || >3.2.0,<4"
 importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
 
 [[package]]
+name = "flake8-ownership"
+version = "2.0.1"
+description = "A flake8 checker for assuring that author, copyright, and license are specified in source files."
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+flake8 = ">=3,<4"
+
+[[package]]
 name = "flake8-polyfill"
 version = "1.0.2"
 description = "Polyfill package for Flake8 plugins"
@@ -760,7 +771,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "eddfddf190bdb3267b49779e2859950febf973d995fda0df6325982a049812c4"
+content-hash = "6098b5a40b561730049963536147753d9c4f94dff5446d55e404246d30254919"
 
 [metadata.files]
 alabaster = [
@@ -886,6 +897,9 @@ flake8-cognitive-complexity = [
 flake8-comprehensions = [
     {file = "flake8-comprehensions-3.3.1.tar.gz", hash = "sha256:e734bf03806bb562886d9bf635d23a65a1a995c251b67d7e007a7b608af9bd22"},
     {file = "flake8_comprehensions-3.3.1-py3-none-any.whl", hash = "sha256:6d80dfafda0d85633f88ea5bc7de949485f71f1e28db7af7719563fe5f62dcb1"},
+]
+flake8-ownership = [
+    {file = "flake8-ownership-2.0.1.tar.gz", hash = "sha256:287d40027b6f1c888348316a6b5c6d105f6d7321a04c8ad40e7d211e76014b58"},
 ]
 flake8-polyfill = [
     {file = "flake8-polyfill-1.0.2.tar.gz", hash = "sha256:e44b087597f6da52ec6393a709e7108b2905317d0c0b744cdca6208e670d8eda"},
