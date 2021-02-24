@@ -16,7 +16,6 @@
 		"python.linting.enabled": true,
 		"python.linting.pylintEnabled": false,
 		"python.linting.flake8Enabled": true,
-		"python.linting.flake8Path": "/usr/local/bin/flake8",
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
