@@ -6,6 +6,7 @@
 
 import pytest
 from pytire import Tire
+from pytire.enums import Unit
 
 
 @pytest.mark.parametrize(
@@ -39,3 +40,18 @@ def test_should_set_attributes(size, diameter, width, wheel_diameter):
     assert tire.diameter == diameter
     assert tire.width == width
     assert tire.wheel_diameter == wheel_diameter
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_unit"),
+    [
+        ("H30x9.50-16", Unit.IMPERIAL),
+        ("27x7.75-15", Unit.IMPERIAL),
+        ("615x225-10", Unit.METRIC),
+        ("18X5.5", Unit.IMPERIAL),
+        ("12.50-16", Unit.IMPERIAL),
+    ]
+)
+def test_should_detect_correct_unit(size, expected_unit):
+    tire = Tire(size)
+    assert tire.unit == expected_unit
