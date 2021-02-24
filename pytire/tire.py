@@ -6,15 +6,11 @@
 
 import re
 from .enums import Unit
+from .constant import METRIC_RE
 
 
 class Tire:
     def __init__(self, size: str):
         self.size = size
-        self._parse_units()
+        self.unit = Unit.METRIC if re.match(METRIC_RE, self.size) else Unit.IMPERIAL
 
-    def _parse_units(self) -> None:
-        if re.match("\d{3}[xX]\d{3}-\d+", self.size): # noqa not an f-string
-            self.unit = Unit.METRIC
-        else:
-            self.unit = Unit.IMPERIAL
