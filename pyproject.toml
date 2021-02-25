@@ -26,8 +26,8 @@ Sphinx = "^3.5.1"
 pre-commit = "^2.10.1"
 flake8-ownership = "^2.0.1"
 autoapi = "^2.0.1"
-m2r = "^0.2.1"
 sphinx-rtd-theme = "^0.5.1"
+recommonmark = "^0.7.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
