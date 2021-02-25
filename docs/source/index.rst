@@ -12,9 +12,10 @@ $ pip install pytire
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
+   readme_link
    pytire/pytire
    licence
 
