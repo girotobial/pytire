@@ -1,0 +1,4 @@
+autoapi=2.0.1
+sphinx-rtd-theme=0.5.1
+recommonmark=0.7.1
+Sphinx=3.5.1
