@@ -40,7 +40,8 @@
 		"magicstack.magicpython",
 		"oderwat.indent-rainbow",
 		"eamodio.gitlens",
-		"github.vscode-pull-request-github"
+		"github.vscode-pull-request-github",
+		"lextudio.restructuredtext"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
