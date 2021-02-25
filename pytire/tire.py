@@ -9,13 +9,13 @@ from typing import Optional
 
 from .constant import DIAMETER_RE, METRIC_RE, WHEEL_DIAMETER_RE, WIDTH_RE
 from .enums import Unit
-from .util import convert_inches_to_meters
+from .util import convert_length
 
 
 class Tire:
     def __init__(self, size: str):
         self.size = size
-        self.unit = Unit.METRIC if re.match(METRIC_RE, self.size) else Unit.IMPERIAL
+        self.unit = Unit.MILLIMETRE if re.match(METRIC_RE, self.size) else Unit.INCH
 
     @property
     def diameter(self) -> Optional[float]:
@@ -27,13 +27,7 @@ class Tire:
             return match
 
         diameter = float(match.group(0))
-        if self.unit == Unit.IMPERIAL:
-            return convert_inches_to_meters(diameter)
-
-        if self.unit == Unit.METRIC:
-            return diameter / 1000
-
-        return None
+        return convert_length(diameter, self.unit, Unit.METRE)
 
     @property
     def width(self) -> Optional[float]:
@@ -44,13 +38,7 @@ class Tire:
             return match
 
         width = float(match.group(0))
-
-        if self.unit == Unit.IMPERIAL:
-            return convert_inches_to_meters(width)
-
-        if self.unit == Unit.METRIC:
-            return width / 1000
-        return None
+        return convert_length(width, self.unit, Unit.METRE)
 
     @property
     def wheel_diameter(self) -> Optional[float]:
@@ -61,4 +49,4 @@ class Tire:
             return match
 
         wheel_diameter = float(match.group(0))
-        return convert_inches_to_meters(wheel_diameter)
+        return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)

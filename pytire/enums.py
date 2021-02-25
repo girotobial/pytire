@@ -8,5 +8,6 @@ import enum
 
 
 class Unit(enum.Enum):
-    METRIC = enum.auto()
-    IMPERIAL = enum.auto()
+    MILLIMETRE = enum.auto()
+    METRE = enum.auto()
+    INCH = enum.auto()

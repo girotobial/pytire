@@ -8,11 +8,21 @@ Utility function unit tests
 
 import pytest
 
-from pytire.util import convert_inches_to_meters
+from pytire.enums import Unit
+from pytire.util import convert_length
 
 
 @pytest.mark.parametrize(
-    ("inches", "meters"), [(1, 0.0254), (50, 1.27), (-18, -0.4572)]
+    ("length", "from_", "to_", "expected_result"),
+    [
+        (1, Unit.INCH, Unit.METRE, 0.0254),
+        (50, Unit.INCH, Unit.METRE, 1.27),
+        (-18, Unit.INCH, Unit.METRE, -0.4572),
+        (1000, Unit.MILLIMETRE, Unit.METRE, 1),
+        (1, Unit.METRE, Unit.METRE, 1),
+    ],
 )
-def test_should_convert_to_meters(inches, meters):
-    assert convert_inches_to_meters(inches) == pytest.approx(meters)
+def test_should_convert_lengths(length, expected_result, from_, to_):
+    assert convert_length(length, from_unit=from_, to_unit=to_) == pytest.approx(
+        expected_result
+    )

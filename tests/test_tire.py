@@ -48,12 +48,12 @@ def test_should_set_attributes(size, diameter, width, wheel_diameter):
 @pytest.mark.parametrize(
     ("size", "expected_unit"),
     [
-        ("H30x9.50-16", Unit.IMPERIAL),
-        ("27x7.75-15", Unit.IMPERIAL),
-        ("615x225-10", Unit.METRIC),
-        ("18X5.5", Unit.IMPERIAL),
-        ("12.50-16", Unit.IMPERIAL),
-        ("H44.5x16.5-21", Unit.IMPERIAL),
+        ("H30x9.50-16", Unit.INCH),
+        ("27x7.75-15", Unit.INCH),
+        ("615x225-10", Unit.MILLIMETRE),
+        ("18X5.5", Unit.INCH),
+        ("12.50-16", Unit.INCH),
+        ("H44.5x16.5-21", Unit.INCH),
     ],
 )
 def test_should_detect_correct_unit(size, expected_unit):
