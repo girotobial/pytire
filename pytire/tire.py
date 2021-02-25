@@ -14,6 +14,14 @@ from .util import convert_length
 
 class Tire:
     def __init__(self, size: str):
+        """A rubber pneumatic tire.
+
+        Parameters
+        ----------
+        size : str
+            Size code as would be displayed on the sidewall.
+            E.g 'H45.5x16.5-21', '30x10.75-16', '615x225-10'
+        """
         self.size = size
         self.unit = Unit.MILLIMETRE if re.match(METRIC_RE, self.size) else Unit.INCH
 
