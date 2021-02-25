@@ -36,6 +36,7 @@ extensions = [
     "recommonmark",
     "sphinx.ext.inheritance_diagram",
     "autoapi.sphinx",
+    "sphinx.ext.intersphinx",
 ]
 
 
@@ -46,6 +47,7 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 
+intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -65,4 +67,4 @@ source_suffix = {
     ".md": "markdown",
 }
 
-autoapi_modules = {"pytire": None}
+autoapi_modules = {"pytire": {"prune": True}}

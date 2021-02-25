@@ -8,14 +8,14 @@ pytire
 
 Getting Started
 ===============
-   $ pip install pytire
+$ pip install pytire
 
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   pytire
+   pytire/pytire
    licence
 
 

@@ -7,17 +7,6 @@
    .. contents::
       :local:
 
-
-Submodules
-==========
-
-.. toctree::
-
-   pytire.constant
-   pytire.enums
-   pytire.tire
-   pytire.util
-
 .. currentmodule:: pytire
 
 
@@ -25,7 +14,7 @@ Classes
 =======
 
 - :py:class:`Tire`:
-  Undocumented.
+  A rubber pneumatic tire.
 
 
 .. autoclass:: Tire

@@ -8,7 +8,7 @@ pytire
 
 Getting Started
 ===============
-   $ pip install pytire
+$ pip install pytire
 
 
 .. toctree::

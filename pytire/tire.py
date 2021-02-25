@@ -13,6 +13,21 @@ from .util import convert_length
 
 
 class Tire:
+    """A rubber pneumatic tire.
+
+    Attributes
+    ----------
+    size : str
+        Size code as would be displayed on the sidewall.
+        E.g 'H45.5x16.5-21', '30x10.75-16', '615x225-10'
+    diameter : float
+        Outer diameter in metres
+    width : float
+        width in metres
+    wheel_diameter : float
+        inner diameter in metres
+    """
+
     def __init__(self, size: str):
         """A rubber pneumatic tire.
 
