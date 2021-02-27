@@ -35,7 +35,7 @@ extensions = [
     "sphinx_rtd_theme",
     "m2r2",
     "sphinx.ext.inheritance_diagram",
-    "autoapi.sphinx",
+    "autoapi.extension",
     "sphinx.ext.intersphinx",
 ]
 
@@ -67,4 +67,4 @@ source_suffix = {
     ".md": "markdown",
 }
 
-autoapi_modules = {"pytire": {"prune": True}}
+autoapi_dirs = ["../../pytire"]

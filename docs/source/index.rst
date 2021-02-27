@@ -16,7 +16,7 @@ $ pip install pytire
    :caption: Contents:
 
    readme_link
-   pytire/pytire
+   autoapi/index.rst
    licence
 
 
