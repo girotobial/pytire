@@ -73,3 +73,21 @@ class Tire:
 
         wheel_diameter = float(match.group(0))
         return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)
+
+    def volume(
+        self, geometry: str = "cuboid", center_hole_filled: bool = True
+    ) -> Optional[float]:
+        """The exterior volume of the tire.
+
+        Parameters
+        ----------
+        geometry : str, default 'cuboid'
+            The shape assumed during the calculation of the volume.
+            allowed values are ['cuboid', 'cylinder', 'square_toroid', 'circular_toroid']
+
+        Returns
+        -------
+        float
+            Volume in m^2
+        """
+        raise NotImplementedError
