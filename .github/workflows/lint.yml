@@ -1,8 +1,8 @@
 name: Continous Integration
 on: [pull_request, push]
 jobs:
-  ci:
-    name: "CI"
+  lint:
+    name: "lint"
     strategy:
       matrix:
         python-version: [3.9]
