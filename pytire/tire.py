@@ -4,6 +4,7 @@
 :license: MIT
 """
 
+import math
 import re
 from typing import Optional
 
@@ -74,9 +75,7 @@ class Tire:
         wheel_diameter = float(match.group(0))
         return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)
 
-    def volume(
-        self, geometry: str = "cuboid", center_hole_filled: bool = True
-    ) -> Optional[float]:
+    def volume(self, geometry: str = "cuboid") -> Optional[float]:
         """The exterior volume of the tire.
 
         Parameters
@@ -90,4 +89,33 @@ class Tire:
         float
             Volume in m^2
         """
-        raise NotImplementedError
+
+        geometry_map = {
+            "cuboid": self.__cuboid_volume,
+            "cylinder": self.__cylinder_volume,
+        }
+
+        if geometry not in geometry_map.keys():
+            raise ValueError(f"{geometry} is not a valid geometry")
+
+        if self.width is None or self.diameter is None:
+            return None
+
+        function = geometry_map.get(geometry)
+        if function is None:
+            return None
+
+        return function()
+
+    def __cuboid_volume(self) -> Optional[float]:
+        if self.diameter is None or self.width is None:
+            return None
+
+        return self.diameter * self.width
+
+    def __cylinder_volume(self) -> Optional[float]:
+        if self.diameter is None or self.width is None:
+            return None
+
+        radius = self.diameter / 2
+        return 2 * math.pi * radius ** 2 * self.width
