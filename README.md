@@ -4,6 +4,9 @@
 A library to make interpreting tire attributes and calculations easier.
 
 ### Table of Contents
+  * [Table of Contents](#table-of-contents)
+  * [Getting Started](#getting-started)
+  * [Dev Setup](#dev-setup)
 ## Getting Started
 To use this library install it via pip
 
@@ -17,7 +20,7 @@ from pytire import Tire
 
 tire = Tire("34x10.75-16")
 ```
-
+[The Docs are here.](https://readthedocs.org/projects/pytire/)
 ## Dev Setup
 
 Clone from github
