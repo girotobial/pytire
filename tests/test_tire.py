@@ -59,3 +59,21 @@ def test_should_set_attributes(size, diameter, width, wheel_diameter):
 def test_should_detect_correct_unit(size, expected_unit):
     tire = Tire(size)
     assert tire.unit == expected_unit
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.184),
+        ("27x7.75-15", 0.135),
+        ("615x225-10", 0.138),
+        ("12.50-16", None),
+        ("18X5.5", 0.064),
+        ("H44.5x16.5-21", 0.474),
+    ],
+)
+def test_should_calculate_cuboid_filled_volume(size, expected_value):
+    tire = Tire(size)
+    assert tire.volume(geometry="cuboid", center_hole_filled=True) == pytest.approx(
+        expected_value
+    )
