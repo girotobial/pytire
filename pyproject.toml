@@ -4,6 +4,13 @@ version = "0.1.0"
 description = "Python library to handle tire attributes."
 authors = ["girotobial <abrobinson1907@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+documentation = "https://pytire.readthedocs.io/en/latest/index.html"
+repository = "https://github.com/girotobial/pytire"
+classifiers = [
+    "Intended Audience :: Manufacturing",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
