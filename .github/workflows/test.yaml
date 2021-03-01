@@ -1,8 +1,8 @@
-name: Continous Integration
+name: test
 on: [pull_request, push]
 jobs:
-  ci:
-    name: "CI"
+  test:
+    name: "test"
     strategy:
       max-parallel: 1
       fail-fast: false
@@ -25,9 +25,4 @@ jobs:
         run: poetry install
       - name: Test
         run: poetry run pytest
-      - name: Flake
-        run: poetry run flake8 pytire
-      - name: Mypy
-        run: poetry run mypy
-      - name: Isort
-        run: poetry run isort pytire
+

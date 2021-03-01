@@ -1,0 +1,24 @@
+name: lint
+on: [pull_request, push]
+jobs:
+  lint:
+    name: "lint"
+    strategy:
+      matrix:
+        python-version: [3.9]
+        poetry-version: [1.1.4]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix. python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dev dependencies
+        run: poetry install
+      - name: Lint
+        run: poetry run pre-commit run --all-files --show-diff-on-failure

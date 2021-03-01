@@ -20,7 +20,7 @@ from pytire import Tire
 
 tire = Tire("34x10.75-16")
 ```
-[The Docs are here.](https://readthedocs.org/projects/pytire/)
+[The Docs are here.](https://pytire.readthedocs.io/en/latest/)
 ## Dev Setup
 
 Clone from github
