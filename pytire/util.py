@@ -6,6 +6,8 @@ Utility functions
 :license: MIT
 """
 
+import math
+
 from .constant import FEET_PER_METER, INCHES_PER_FOOT
 from .enums import Unit
 
@@ -45,3 +47,19 @@ def convert_length(length: float, from_unit: Unit, to_unit: Unit) -> float:
         )
 
     return length * factor
+
+
+def circle_area(radius: float) -> float:
+    """calculates the area of a circle
+
+    Parameters
+    ----------
+    radius : float
+        the radius of the circle
+
+    Returns
+    -------
+    float
+        the area of the circle
+    """
+    return radius ** 2 * math.pi
