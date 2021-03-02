@@ -4,6 +4,7 @@
 :license: MIT
 """
 
+import math
 import re
 from typing import Optional
 
@@ -93,6 +94,7 @@ class Tire:
             "cuboid": self.__cuboid_volume,
             "cylinder": self.__cylinder_volume,
             "square_toroid": self.__square_toroid_volume,
+            "circular_toroid": self.__circular_toroid_volume,
         }
 
         if geometry not in geometry_map.keys():
@@ -126,3 +128,16 @@ class Tire:
         cylinder_volume = self.__cylinder_volume()
         assert cylinder_volume is not None
         return cylinder_volume - wheel_volume
+
+    def __circular_toroid_volume(self) -> Optional[float]:
+        if self.diameter is None or self.width is None or self.wheel_diameter is None:
+            return None
+
+        tyre_radius = self.diameter / 2
+        wheel_radius = self.wheel_diameter / 2
+
+        cross_section_radius = 0.5 * (tyre_radius - wheel_radius)
+        cross_section_area = circle_area(cross_section_radius)
+        toroid_radius = tyre_radius - cross_section_radius
+
+        return 2 * math.pi * cross_section_area * toroid_radius
