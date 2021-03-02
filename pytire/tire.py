@@ -4,13 +4,12 @@
 :license: MIT
 """
 
-import math
 import re
 from typing import Optional
 
 from .constant import DIAMETER_RE, METRIC_RE, WHEEL_DIAMETER_RE, WIDTH_RE
 from .enums import Unit
-from .util import convert_length
+from .util import circle_area, convert_length
 
 
 class Tire:
@@ -93,13 +92,11 @@ class Tire:
         geometry_map = {
             "cuboid": self.__cuboid_volume,
             "cylinder": self.__cylinder_volume,
+            "square_toroid": self.__square_toroid_volume,
         }
 
         if geometry not in geometry_map.keys():
             raise ValueError(f"{geometry} is not a valid geometry")
-
-        if self.width is None or self.diameter is None:
-            return None
 
         function = geometry_map.get(geometry)
         if function is None:
@@ -118,4 +115,14 @@ class Tire:
             return None
 
         radius = self.diameter / 2
-        return 2 * math.pi * radius ** 2 * self.width
+        return circle_area(radius) * self.width
+
+    def __square_toroid_volume(self) -> Optional[float]:
+        if self.diameter is None or self.width is None or self.wheel_diameter is None:
+            return None
+
+        inner_radius = self.wheel_diameter / 2
+        wheel_volume = circle_area(inner_radius) * self.width
+        cylinder_volume = self.__cylinder_volume()
+        assert cylinder_volume is not None
+        return cylinder_volume - wheel_volume
