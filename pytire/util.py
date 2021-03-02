@@ -62,4 +62,4 @@ def circle_area(radius: float) -> float:
     float
         the area of the circle
     """
-    return 2 * radius ** 2 * math.pi
+    return radius ** 2 * math.pi

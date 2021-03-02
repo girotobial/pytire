@@ -80,12 +80,12 @@ def test_should_calculate_cuboid_volume(size, expected_value):
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
-        ("H30x9.50-16", 0.220083305),
-        ("27x7.75-15", 0.1454287),
-        ("615x225-10", 0.1336757),
+        ("H30x9.50-16", 0.110041652671605),
+        ("27x7.75-15", 0.0727143657522103),
+        ("615x225-10", 0.066837874578975),
         ("12.50-16", None),
-        ("18X5.5", 0.045869994),
-        ("H44.5x16.5-21", 0.84105607),
+        ("18X5.5", 0.0229349970831344),
+        ("H44.5x16.5-21", 0.420528036795157),
     ],
 )
 def test_should_calculate_cylinder_volume(size, expected_value):
@@ -96,12 +96,12 @@ def test_should_calculate_cylinder_volume(size, expected_value):
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
-        ("H30x9.50-16", 0.045568505),
-        ("27x7.75-15", 0.030567693),
-        ("615x225-10", 0.034928824),
+        ("H30x9.50-16", 0.0455685047567235),
+        ("27x7.75-15", 0.0305676926318393),
+        ("615x225-10", 0.034928823917073),
         ("12.50-16", None),
         ("18X5.5", None),
-        ("H44.5x16.5-21", 0.182821766),
+        ("H44.5x16.5-21", 0.182821765999277),
     ],
 )
 def test_should_calculate_circular_toroid_volume(size, expected_value):
@@ -112,12 +112,12 @@ def test_should_calculate_circular_toroid_volume(size, expected_value):
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
-        ("H30x9.50-16", 0.157481832),
-        ("27x7.75-15", 0.100543321),
-        ("615x225-10", 0.110873914),
+        ("H30x9.50-16", 0.0787409159116815),
+        ("27x7.75-15", 0.050271660273133),
+        ("615x225-10", 0.05543695702894),
         ("12.50-16", None),
         ("18X5.5", None),
-        ("H44.5x16.5-21", 0.653753597),
+        ("H44.5x16.5-21", 0.326876798705692),
     ],
 )
 def test_should_calculate_square_toroid_volume(size, expected_value):

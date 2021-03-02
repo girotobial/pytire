@@ -31,8 +31,8 @@ def test_should_convert_lengths(length, expected_result, from_, to_):
 @pytest.mark.parametrize(
     ("radius", "area"),
     [
-        (1, 6.28318530717959),
-        (5, 157.07963267949),
+        (1, 3.14159265358979),
+        (5, 78.5398163397448),
     ],
 )
 def test_should_calculate_circular_area(radius, area):
