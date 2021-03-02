@@ -9,7 +9,7 @@ Utility function unit tests
 import pytest
 
 from pytire.enums import Unit
-from pytire.util import convert_length
+from pytire.util import circle_area, convert_length
 
 
 @pytest.mark.parametrize(
@@ -26,3 +26,14 @@ def test_should_convert_lengths(length, expected_result, from_, to_):
     assert convert_length(length, from_unit=from_, to_unit=to_) == pytest.approx(
         expected_result
     )
+
+
+@pytest.mark.parametrize(
+    ("radius", "area"),
+    [
+        (1, 6.28318530717959),
+        (5, 157.07963267949),
+    ],
+)
+def test_should_calculate_circular_area(radius, area):
+    assert circle_area(radius) == pytest.approx(area)
