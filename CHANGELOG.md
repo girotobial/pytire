@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0]
+### Added
+- Volume calculation method
+
 ## [0.1.0] - 2020-03-01
 ### Added
 - This changelog file
