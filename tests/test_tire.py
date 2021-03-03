@@ -48,14 +48,78 @@ def test_should_set_attributes(size, diameter, width, wheel_diameter):
 @pytest.mark.parametrize(
     ("size", "expected_unit"),
     [
-        ("H30x9.50-16", Unit.IMPERIAL),
-        ("27x7.75-15", Unit.IMPERIAL),
-        ("615x225-10", Unit.METRIC),
-        ("18X5.5", Unit.IMPERIAL),
-        ("12.50-16", Unit.IMPERIAL),
-        ("H44.5x16.5-21", Unit.IMPERIAL),
+        ("H30x9.50-16", Unit.INCH),
+        ("27x7.75-15", Unit.INCH),
+        ("615x225-10", Unit.MILLIMETRE),
+        ("18X5.5", Unit.INCH),
+        ("12.50-16", Unit.INCH),
+        ("H44.5x16.5-21", Unit.INCH),
     ],
 )
 def test_should_detect_correct_unit(size, expected_unit):
     tire = Tire(size)
     assert tire.unit == expected_unit
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.1838705),
+        ("27x7.75-15", 0.1349997),
+        ("615x225-10", 0.138375),
+        ("12.50-16", None),
+        ("18X5.5", 0.0638708),
+        ("H44.5x16.5-21", 0.4737087),
+    ],
+)
+def test_should_calculate_cuboid_volume(size, expected_value):
+    tire = Tire(size)
+    assert tire.volume(geometry="cuboid") == pytest.approx(expected_value)
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.110041652671605),
+        ("27x7.75-15", 0.0727143657522103),
+        ("615x225-10", 0.066837874578975),
+        ("12.50-16", None),
+        ("18X5.5", 0.0229349970831344),
+        ("H44.5x16.5-21", 0.420528036795157),
+    ],
+)
+def test_should_calculate_cylinder_volume(size, expected_value):
+    tire = Tire(size)
+    assert tire.volume(geometry="cylinder") == pytest.approx(expected_value)
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.0455685047567235),
+        ("27x7.75-15", 0.0305676926318393),
+        ("615x225-10", 0.034928823917073),
+        ("12.50-16", None),
+        ("18X5.5", None),
+        ("H44.5x16.5-21", 0.182821765999277),
+    ],
+)
+def test_should_calculate_circular_toroid_volume(size, expected_value):
+    tire = Tire(size)
+    assert tire.volume(geometry="circular_toroid") == pytest.approx(expected_value)
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.0787409159116815),
+        ("27x7.75-15", 0.050271660273133),
+        ("615x225-10", 0.05543695702894),
+        ("12.50-16", None),
+        ("18X5.5", None),
+        ("H44.5x16.5-21", 0.326876798705692),
+    ],
+)
+def test_should_calculate_square_toroid_volume(size, expected_value):
+    tire = Tire(size)
+    assert tire.volume(geometry="square_toroid") == pytest.approx(expected_value)

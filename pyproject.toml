@@ -1,9 +1,16 @@
 [tool.poetry]
 name = "pytire"
-version = "0.1.0"
+version = "0.2.1"
 description = "Python library to handle tire attributes."
 authors = ["girotobial <abrobinson1907@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+documentation = "https://pytire.readthedocs.io/en/latest/index.html"
+repository = "https://github.com/girotobial/pytire"
+classifiers = [
+    "Intended Audience :: Manufacturing",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -25,6 +32,9 @@ flake8-use-fstring = "^1.1"
 Sphinx = "^3.5.1"
 pre-commit = "^2.10.1"
 flake8-ownership = "^2.0.1"
+sphinx-rtd-theme = "^0.5.1"
+m2r2 = "^0.2.7"
+sphinx-autoapi = "^1.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
