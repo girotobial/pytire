@@ -6,6 +6,7 @@ Utility functions
 :license: MIT
 """
 
+
 import math
 
 from .constant import FEET_PER_METER, INCHES_PER_FOOT

@@ -10,7 +10,7 @@ from typing import Optional
 
 from .constant import DIAMETER_RE, METRIC_RE, WHEEL_DIAMETER_RE, WIDTH_RE
 from .enums import Unit
-from .util import circle_area, convert_length
+from .geometry import circle_area, convert_length
 
 
 class Tire:

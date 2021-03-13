@@ -9,7 +9,7 @@ Utility function unit tests
 import pytest
 
 from pytire.enums import Unit
-from pytire.util import circle_area, convert_length
+from pytire.geometry import circle_area, convert_length
 
 
 @pytest.mark.parametrize(
