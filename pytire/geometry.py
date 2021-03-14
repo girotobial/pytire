@@ -199,52 +199,39 @@ class Cuboid(ThreeDimensionalShape):
 
 
 class CiruclarToroid(ThreeDimensionalShape):
-    def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
-        self.outer_diameter: float = outer_diameter
-        self.width: float = width
-        self.inner_diameter: float = inner_diameter
+    def __init__(self, radius_of_revolution: float, cross_section_radius: float):
+        self.radius_of_revolution = radius_of_revolution
+        self.cross_section_radius = cross_section_radius
         self._validate_args()
 
     def _validate_args(
         self,
     ) -> None:
         args = {
-            "outer_diameter": self.outer_diameter,
-            "width": self.width,
-            "inner_diameter": self.inner_diameter,
+            "radius_of_revolution": self.radius_of_revolution,
+            "cross_section_radius": self.cross_section_radius,
         }
         if None in args.values():
             raise TypeError(
                 f"Cannot create {self.__class__} with {args} as one or more is None"
             )
 
-    @property
-    def outer_radius(self) -> float:
-        return self.outer_diameter / 2.0
-
-    @property
-    def inner_radius(self) -> float:
-        return self.inner_diameter / 2.0
-
-    @property
-    def cross_section_radius(self) -> float:
-        return 0.5 * (self.outer_radius - self.inner_radius)
-
     def cross_section_area(self) -> float:
         return circle_area(self.cross_section_radius)
 
-    @property
-    def swept_radius(self) -> float:
-        return self.outer_radius - self.cross_section_radius
-
     def volume(self) -> float:
-        return 2 * math.pi * self.cross_section_area() * self.swept_radius
+        return 2 * math.pi * self.cross_section_area() * self.radius_of_revolution
 
     @classmethod
     def from_tire_dimensions(
         cls, outer_diameter: float, width: float, inner_diameter: float
     ) -> CiruclarToroid:
-        return cls(outer_diameter, width, inner_diameter)
+        cross_section_radius = 0.25 * (outer_diameter - inner_diameter)
+        radius_of_revolution = outer_diameter / 2 - cross_section_radius
+        return cls(
+            radius_of_revolution=radius_of_revolution,
+            cross_section_radius=cross_section_radius,
+        )
 
 
 class SquareToroid(ThreeDimensionalShape):

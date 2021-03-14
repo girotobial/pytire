@@ -82,23 +82,7 @@ def test_cuboid_from_tyre():
 
 @pytest.fixture
 def circular_toroid():
-    return CiruclarToroid(outer_diameter=4, width=2, inner_diameter=3)
-
-
-def test_circular_toroid_outer_radius(circular_toroid):
-    assert circular_toroid.outer_radius == 2
-
-
-def test_circular_toroid_inner_radius(circular_toroid):
-    assert circular_toroid.inner_radius == 1.5
-
-
-def test_circular_toroid_cross_section_radius(circular_toroid):
-    assert circular_toroid.cross_section_radius == 0.25
-
-
-def test_circular_toroid_swept_radius(circular_toroid):
-    assert circular_toroid.swept_radius == 1.75
+    return CiruclarToroid(radius_of_revolution=1.75, cross_section_radius=0.25)
 
 
 def test_circular_toroid_cross_sectional_area(circular_toroid):
