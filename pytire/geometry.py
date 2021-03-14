@@ -199,7 +199,26 @@ class Cuboid(ThreeDimensionalShape):
 
 
 class CiruclarToroid(ThreeDimensionalShape):
-    def __init__(self, radius_of_revolution: float, cross_section_radius: float):
+    """A circular toroid https://en.wikipedia.org/wiki/Toroid
+
+    Parameters
+    ----------
+    cross_section_radius : float
+        the radius of the circular cross section that is rotated around the radius of revolution aka "the minor radius"
+    radius_of_revolution : float
+        the radius of the larger circle, around the perimeter of which, the smaller circle is rotated.
+    """
+
+    def __init__(self, cross_section_radius: float, radius_of_revolution: float):
+        """A circular toroid
+
+        Parameters
+        ----------
+        cross_section_radius : float
+            the radius of the circular cross section that is rotated around the radius of revolution. AKA "the minor radius"
+        radius_of_revolution : float
+            the radius of the larger circle, around the perimeter of which, the smaller circle is rotated. AKA "the major radius"
+        """
         self.radius_of_revolution = radius_of_revolution
         self.cross_section_radius = cross_section_radius
         self._validate_args()
