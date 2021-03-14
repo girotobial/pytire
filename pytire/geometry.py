@@ -70,7 +70,7 @@ def circle_area(radius: float) -> float:
 class ThreeDimensionalShape(abc.ABC):
     outer_diameter: float
     width: float
-    innder_diameter: float
+    inner_diameter: Optional[float]
 
     @abc.abstractmethod
     def volume(self) -> Optional[float]:
@@ -87,6 +87,19 @@ class Cylinder(ThreeDimensionalShape):
         self.outer_diameter = outer_diameter
         self.width = width
         self.inner_diameter = inner_diameter
+        self.validate_args()
+
+    def validate_args(
+        self,
+    ) -> None:
+        args = {
+            "outer_diameter": self.outer_diameter,
+            "width": self.width,
+        }
+        if None in args.values():
+            raise TypeError(
+                f"Cannot create {self.__class__} with {args} as one or more is None"
+            )
 
     @property
     def outer_radius(self):
@@ -106,6 +119,19 @@ class Cuboid(ThreeDimensionalShape):
         self.outer_diameter = outer_diameter
         self.width = width
         self.inner_diameter = inner_diameter
+        self.validate_args()
+
+    def validate_args(
+        self,
+    ) -> None:
+        args = {
+            "outer_diameter": self.outer_diameter,
+            "width": self.width,
+        }
+        if None in args.values():
+            raise TypeError(
+                f"Cannot create {self.__class__} with {args} as one or more is None"
+            )
 
     def volume(self) -> float:
         return self.outer_diameter * self.width
@@ -113,9 +139,23 @@ class Cuboid(ThreeDimensionalShape):
 
 class CiruclarToroid(ThreeDimensionalShape):
     def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
-        self.outer_diameter = outer_diameter
-        self.width = width
-        self.innder_diameter = inner_diameter
+        self.outer_diameter: float = outer_diameter
+        self.width: float = width
+        self.inner_diameter: float = inner_diameter
+        self.validate_args()
+
+    def validate_args(
+        self,
+    ) -> None:
+        args = {
+            "outer_diameter": self.outer_diameter,
+            "width": self.width,
+            "inner_diameter": self.inner_diameter,
+        }
+        if None in args.values():
+            raise TypeError(
+                f"Cannot create {self.__class__} with {args} as one or more is None"
+            )
 
     @property
     def outer_radius(self) -> float:
@@ -123,7 +163,7 @@ class CiruclarToroid(ThreeDimensionalShape):
 
     @property
     def inner_radius(self) -> float:
-        return self.innder_diameter / 2.0
+        return self.inner_diameter / 2.0
 
     @property
     def cross_section_radius(self) -> float:
@@ -144,10 +184,24 @@ class SquareToroid(ThreeDimensionalShape):
     def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
         self.outer_diameter = outer_diameter
         self.width = width
-        self.innder_diameter = inner_diameter
+        self.inner_diameter = inner_diameter
+        self.validate_args()
 
         self.outer_cylinder = Cylinder(outer_diameter, width)
         self.inner_cylinder = Cylinder(inner_diameter, width)
+
+    def validate_args(
+        self,
+    ) -> None:
+        args = {
+            "outer_diameter": self.outer_diameter,
+            "width": self.width,
+            "inner_diameter": self.inner_diameter,
+        }
+        if None in args.values():
+            raise TypeError(
+                f"Cannot create {self.__class__} with {args} as one or more is None"
+            )
 
     def volume(self) -> float:
         return self.outer_cylinder.volume() - self.inner_cylinder.volume()
