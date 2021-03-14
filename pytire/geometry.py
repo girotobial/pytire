@@ -24,9 +24,9 @@ def convert_length(length: float, from_unit: Unit, to_unit: Unit) -> float:
     length : float
         measurement to convert
     from_unit : Unit
-        [description]
+        A Unit object to convert from.
     to_unit : Unit
-        [description]
+        A Unit object to convert to.
 
     Returns
     -------
