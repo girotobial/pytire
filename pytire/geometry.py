@@ -6,8 +6,9 @@ Utility functions
 :license: MIT
 """
 
-
+import abc
 import math
+from typing import Optional
 
 from .constant import FEET_PER_METER, INCHES_PER_FOOT
 from .enums import Unit
@@ -64,3 +65,89 @@ def circle_area(radius: float) -> float:
         the area of the circle
     """
     return radius ** 2 * math.pi
+
+
+class ThreeDimensionalShape(abc.ABC):
+    outer_diameter: float
+    width: float
+    innder_diameter: float
+
+    @abc.abstractmethod
+    def volume(self) -> float:
+        pass
+
+
+class Cylinder(ThreeDimensionalShape):
+    def __init__(
+        self,
+        outer_diameter: float,
+        width: float,
+        inner_diameter: Optional[float] = None,
+    ):
+        self.outer_diameter = outer_diameter
+        self.width = width
+        self.inner_diameter = inner_diameter
+
+    @property
+    def outer_radius(self):
+        return self.outer_diameter / 2
+
+    def volume(self) -> float:
+        return circle_area(self.outer_radius) * self.width
+
+
+class Cuboid(ThreeDimensionalShape):
+    def __init__(
+        self,
+        outer_diameter: float,
+        width: float,
+        inner_diameter: Optional[float] = None,
+    ):
+        self.outer_diameter = outer_diameter
+        self.width = width
+        self.inner_diameter = inner_diameter
+
+    def volume(self) -> float:
+        return self.outer_diameter * self.width
+
+
+class CiruclarToroid(ThreeDimensionalShape):
+    def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
+        self.outer_diameter = outer_diameter
+        self.width = width
+        self.innder_diameter = inner_diameter
+
+    @property
+    def outer_radius(self) -> float:
+        return self.outer_diameter / 2.0
+
+    @property
+    def inner_radius(self) -> float:
+        return self.innder_diameter / 2.0
+
+    @property
+    def cross_section_radius(self) -> float:
+        return 0.5 * (self.outer_radius - self.inner_radius)
+
+    def cross_section_area(self) -> float:
+        return circle_area(self.cross_section_radius)
+
+    @property
+    def swept_radius(self) -> float:
+        return self.outer_radius - self.cross_section_radius
+
+    def volume(self) -> float:
+        return 2 * math.pi * self.cross_section_area() * self.swept_radius
+
+
+class SquareToroid(ThreeDimensionalShape):
+    def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
+        self.outer_diameter = outer_diameter
+        self.width = width
+        self.innder_diameter = inner_diameter
+
+        self.outer_cylinder = Cylinder(outer_diameter, width)
+        self.inner_cylinder = Cylinder(inner_diameter, width)
+
+    def volume(self) -> float:
+        return self.outer_cylinder.volume() - self.inner_cylinder.volume()
