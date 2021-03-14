@@ -12,12 +12,12 @@ import pytest
 
 from pytire.enums import Unit
 from pytire.geometry import (
-    CiruclarToroid,
     Cuboid,
     Cylinder,
     NoneShape,
     SquareToroid,
     ThreeDimensionalShape,
+    Torus,
     circle_area,
     convert_length,
     create_shape,
@@ -81,16 +81,16 @@ def test_cuboid_from_tyre():
 
 
 @pytest.fixture
-def circular_toroid():
-    return CiruclarToroid(radius_of_revolution=1.75, cross_section_radius=0.25)
+def torus():
+    return Torus(radius_of_revolution=1.75, cross_section_radius=0.25)
 
 
-def test_circular_toroid_cross_sectional_area(circular_toroid):
-    assert circular_toroid.cross_section_area() == 1 / 16 * math.pi
+def test_torus_cross_sectional_area(torus):
+    assert torus.cross_section_area() == 1 / 16 * math.pi
 
 
-def test_circular_toroid_volume(circular_toroid):
-    assert circular_toroid.volume() == math.pi ** 2 / 4 * (2 + 1.5) * (2 - 1.5) ** 2
+def test_torus_volume(torus):
+    assert torus.volume() == math.pi ** 2 / 4 * (2 + 1.5) * (2 - 1.5) ** 2
 
 
 @pytest.fixture

@@ -81,7 +81,7 @@ class Tire:
         ----------
         geometry : str, default 'cuboid'
             The shape assumed during the calculation of the volume.
-            allowed values are ['cuboid', 'cylinder', 'square_toroid', 'circular_toroid']
+            allowed values are ['cuboid', 'cylinder', 'square_toroid', 'torus']
 
         Returns
         -------

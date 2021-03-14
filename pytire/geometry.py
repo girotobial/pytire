@@ -198,8 +198,8 @@ class Cuboid(ThreeDimensionalShape):
         return cls(outer_diameter, outer_diameter, width)
 
 
-class CiruclarToroid(ThreeDimensionalShape):
-    """A circular toroid https://en.wikipedia.org/wiki/Toroid
+class Torus(ThreeDimensionalShape):
+    """A torus https://en.wikipedia.org/wiki/Toroid
 
     Parameters
     ----------
@@ -210,7 +210,7 @@ class CiruclarToroid(ThreeDimensionalShape):
     """
 
     def __init__(self, cross_section_radius: float, radius_of_revolution: float):
-        """A circular toroid
+        """A torus
 
         Parameters
         ----------
@@ -244,7 +244,7 @@ class CiruclarToroid(ThreeDimensionalShape):
     @classmethod
     def from_tire_dimensions(
         cls, outer_diameter: float, width: float, inner_diameter: float
-    ) -> CiruclarToroid:
+    ) -> Torus:
         cross_section_radius = 0.25 * (outer_diameter - inner_diameter)
         radius_of_revolution = outer_diameter / 2 - cross_section_radius
         return cls(
@@ -311,7 +311,7 @@ def create_shape(
         "cuboid": Cuboid,
         "cylinder": Cylinder,
         "square_toroid": SquareToroid,
-        "circular_toroid": CiruclarToroid,
+        "torus": Torus,
     }
 
     try:

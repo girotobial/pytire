@@ -104,9 +104,9 @@ def test_should_calculate_cylinder_volume(size, expected_value):
         ("H44.5x16.5-21", 0.182821765999277),
     ],
 )
-def test_should_calculate_circular_toroid_volume(size, expected_value):
+def test_should_calculate_torus_volume(size, expected_value):
     tire = Tire(size)
-    assert tire.volume(geometry="circular_toroid") == pytest.approx(expected_value)
+    assert tire.volume(geometry="torus") == pytest.approx(expected_value)
 
 
 @pytest.mark.parametrize(
