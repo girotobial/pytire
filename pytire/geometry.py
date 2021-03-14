@@ -199,7 +199,7 @@ class Cuboid(ThreeDimensionalShape):
 
 
 class Torus(ThreeDimensionalShape):
-    """A torus https://en.wikipedia.org/wiki/Toroid
+    """A torus https://en.wikipedia.org/wiki/Torus
 
     Parameters
     ----------
@@ -254,7 +254,30 @@ class Torus(ThreeDimensionalShape):
 
 
 class SquareToroid(ThreeDimensionalShape):
+    """A toroid with a square cross section https://en.wikipedia.org/wiki/Toroid
+
+    Parameters
+    ----------
+    outer_diameter : float
+        The widest diameter of the toroid
+    width : float
+        The width of the axis orthaganol to the plane of rotation
+    inner_diameter : float
+        The diameter of the central hole
+    """
+
     def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
+        """A toroid with a square cross section https://en.wikipedia.org/wiki/Toroid
+
+        Parameters
+        ----------
+        outer_diameter : float
+            The widest diameter of the toroid
+        width : float
+            The width of the axis orthaganol to the plane of rotation
+        inner_diameter : float
+            The diameter of the central hole
+        """
         self.outer_diameter = outer_diameter
         self.width = width
         self.inner_diameter = inner_diameter
