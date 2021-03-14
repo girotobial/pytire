@@ -73,7 +73,7 @@ class ThreeDimensionalShape(abc.ABC):
     innder_diameter: float
 
     @abc.abstractmethod
-    def volume(self) -> float:
+    def volume(self) -> Optional[float]:
         pass
 
 
@@ -151,3 +151,41 @@ class SquareToroid(ThreeDimensionalShape):
 
     def volume(self) -> float:
         return self.outer_cylinder.volume() - self.inner_cylinder.volume()
+
+
+class NoneShape(ThreeDimensionalShape):
+    def __init__(
+        self,
+        outer_diameter: Optional[float],
+        width: Optional[float],
+        inner_diameter: Optional[float],
+    ):
+        pass
+
+    def volume(self) -> None:
+        return None
+
+
+def create_shape(
+    geometry: str,
+    outer_diameter: Optional[float],
+    width: Optional[float],
+    inner_diameter: Optional[float],
+) -> ThreeDimensionalShape:
+    _shapes = {
+        "cuboid": Cuboid,
+        "cylinder": Cylinder,
+        "square_toroid": SquareToroid,
+        "circular_toroid": CiruclarToroid,
+    }
+
+    try:
+        shape = _shapes[geometry](outer_diameter, width, inner_diameter)
+    except TypeError:
+        shape = NoneShape(outer_diameter, width, inner_diameter)
+    except KeyError:
+        raise ValueError(
+            f"{geometry} is not an available shape please select one of {list(_shapes.keys())}"
+        )
+
+    return shape
