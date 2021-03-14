@@ -90,7 +90,7 @@ class Cylinder(ThreeDimensionalShape):
     Parameters
     ----------
     diameter : float
-        diameter of the circular cross section
+        the length of the straight line that passes through the center of the circular cross section
     width : float
         The length of the side orthagonol to the circular cross section
     """
@@ -105,7 +105,7 @@ class Cylinder(ThreeDimensionalShape):
         Parameters
         ----------
         diameter : float
-            diameter of the circular cross section
+            the length of the straight line that passes through the center of the circular cross section
         width : float
             The length of the side orthagonol to the circular cross section
         """
@@ -140,12 +140,35 @@ class Cylinder(ThreeDimensionalShape):
 
 
 class Cuboid(ThreeDimensionalShape):
+    """A rectangular cuboid
+
+    Parameters
+    ----------
+    height : float
+
+    length : float
+
+    width : float
+
+    """
+
     def __init__(
         self,
         height: float,
         length: float,
         width: float,
     ):
+        """A rectangular cuboid
+
+        Parameters
+        ----------
+        height : float
+            the height of the cuboid
+        length : float
+            the length of the cuboid
+        width : float
+            the width of the cuboid
+        """
         self.height = height
         self.length = length
         self.width = width
@@ -165,6 +188,7 @@ class Cuboid(ThreeDimensionalShape):
             )
 
     def volume(self) -> float:
+        """the volume of the cuboid"""
         return self.height * self.width * self.length
 
     @classmethod
