@@ -67,7 +67,7 @@ def cuboid():
 
 
 def test_cuboid_volume(cuboid):
-    assert cuboid.volume() == 8
+    assert cuboid.volume() == 32
 
 
 @pytest.fixture

@@ -64,12 +64,12 @@ def test_should_detect_correct_unit(size, expected_unit):
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
-        ("H30x9.50-16", 0.1838705),
-        ("27x7.75-15", 0.1349997),
-        ("615x225-10", 0.138375),
+        ("H30x9.50-16", 0.1401093972),
+        ("27x7.75-15", 0.09258281483),
+        ("615x225-10", 0.085100625),
         ("12.50-16", None),
-        ("18X5.5", 0.0638708),
-        ("H44.5x16.5-21", 0.4737087),
+        ("18X5.5", 0.02920174805),
+        ("H44.5x16.5-21", 0.5354329775),
     ],
 )
 def test_should_calculate_cuboid_volume(size, expected_value):

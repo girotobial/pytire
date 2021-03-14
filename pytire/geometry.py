@@ -10,8 +10,8 @@ import abc
 import math
 from typing import Optional
 
-from .constant import FEET_PER_METER, INCHES_PER_FOOT
-from .enums import Unit
+from pytire.constant import FEET_PER_METER, INCHES_PER_FOOT
+from pytire.enums import Unit
 
 
 def convert_length(length: float, from_unit: Unit, to_unit: Unit) -> float:
@@ -134,7 +134,7 @@ class Cuboid(ThreeDimensionalShape):
             )
 
     def volume(self) -> float:
-        return self.outer_diameter * self.width
+        return self.outer_diameter ** 2 * self.width
 
 
 class CiruclarToroid(ThreeDimensionalShape):
