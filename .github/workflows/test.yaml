@@ -1,5 +1,5 @@
-name: test
-on: [pull_request, push]
+name: test_pr
+on: [pull_request]
 jobs:
   test:
     name: "test"
