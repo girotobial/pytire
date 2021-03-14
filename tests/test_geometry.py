@@ -53,11 +53,11 @@ def test_should_calculate_circular_area(radius, area):
 
 @pytest.fixture
 def cylinder():
-    return Cylinder(outer_diameter=4, width=2, inner_diameter=3)
+    return Cylinder(diameter=4, width=2)
 
 
-def test_cylinder_outer_radius(cylinder):
-    assert cylinder.outer_radius == 2
+def test_cylinder_radius(cylinder):
+    assert cylinder.radius == 2
 
 
 def test_cylinder_volume(cylinder):
@@ -66,11 +66,18 @@ def test_cylinder_volume(cylinder):
 
 @pytest.fixture
 def cuboid():
-    return Cuboid(outer_diameter=4, width=2, inner_diameter=3)
+    return Cuboid(height=4, length=4, width=2)
 
 
 def test_cuboid_volume(cuboid):
     assert cuboid.volume() == 32
+
+
+def test_cuboid_from_tyre():
+    cuboid = Cuboid.from_tire_dimensions(4, 3, 2)
+    assert cuboid.height == 4
+    assert cuboid.length == 4
+    assert cuboid.width == 3
 
 
 @pytest.fixture

@@ -6,6 +6,8 @@ Utility functions
 :license: MIT
 """
 
+from __future__ import annotations
+
 import abc
 import math
 from typing import Optional
@@ -68,32 +70,54 @@ def circle_area(radius: float) -> float:
 
 
 class ThreeDimensionalShape(abc.ABC):
-    outer_diameter: float
-    width: float
-    inner_diameter: Optional[float]
+    """Defines the interface for 3D shapes."""
 
     @abc.abstractmethod
     def volume(self) -> Optional[float]:
         raise NotImplementedError
 
+    @classmethod
+    @abc.abstractmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ) -> ThreeDimensionalShape:
+        raise NotImplementedError
+
 
 class Cylinder(ThreeDimensionalShape):
+    """A right angled cylinder.
+
+    Parameters
+    ----------
+    diameter : float
+        diameter of the circular cross section
+    width : float
+        The length of the side orthagonol to the circular cross section
+    """
+
     def __init__(
         self,
-        outer_diameter: float,
+        diameter: float,
         width: float,
-        inner_diameter: Optional[float] = None,
     ):
-        self.outer_diameter = outer_diameter
+        """A right angled cylinder.
+
+        Parameters
+        ----------
+        diameter : float
+            diameter of the circular cross section
+        width : float
+            The length of the side orthagonol to the circular cross section
+        """
+        self.diameter = diameter
         self.width = width
-        self.inner_diameter = inner_diameter
         self.validate_args()
 
     def validate_args(
         self,
     ) -> None:
         args = {
-            "outer_diameter": self.outer_diameter,
+            "diameter": self.diameter,
             "width": self.width,
         }
         if None in args.values():
@@ -102,30 +126,37 @@ class Cylinder(ThreeDimensionalShape):
             )
 
     @property
-    def outer_radius(self):
-        return self.outer_diameter / 2
+    def radius(self):
+        return self.diameter / 2
 
     def volume(self) -> float:
-        return circle_area(self.outer_radius) * self.width
+        return circle_area(self.radius) * self.width
+
+    @classmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ) -> Cylinder:
+        return cls(outer_diameter, width)
 
 
 class Cuboid(ThreeDimensionalShape):
     def __init__(
         self,
-        outer_diameter: float,
+        height: float,
+        length: float,
         width: float,
-        inner_diameter: Optional[float] = None,
     ):
-        self.outer_diameter = outer_diameter
+        self.height = height
+        self.length = length
         self.width = width
-        self.inner_diameter = inner_diameter
         self.validate_args()
 
     def validate_args(
         self,
     ) -> None:
         args = {
-            "outer_diameter": self.outer_diameter,
+            "length": self.length,
+            "height": self.height,
             "width": self.width,
         }
         if None in args.values():
@@ -134,7 +165,13 @@ class Cuboid(ThreeDimensionalShape):
             )
 
     def volume(self) -> float:
-        return self.outer_diameter ** 2 * self.width
+        return self.height * self.width * self.length
+
+    @classmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ) -> Cuboid:
+        return cls(outer_diameter, outer_diameter, width)
 
 
 class CiruclarToroid(ThreeDimensionalShape):
@@ -179,6 +216,12 @@ class CiruclarToroid(ThreeDimensionalShape):
     def volume(self) -> float:
         return 2 * math.pi * self.cross_section_area() * self.swept_radius
 
+    @classmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ) -> CiruclarToroid:
+        return cls(outer_diameter, width, inner_diameter)
+
 
 class SquareToroid(ThreeDimensionalShape):
     def __init__(self, outer_diameter: float, width: float, inner_diameter: float):
@@ -186,9 +229,6 @@ class SquareToroid(ThreeDimensionalShape):
         self.width = width
         self.inner_diameter = inner_diameter
         self.validate_args()
-
-        self.outer_cylinder = Cylinder(outer_diameter, width)
-        self.inner_cylinder = Cylinder(inner_diameter, width)
 
     def validate_args(
         self,
@@ -204,20 +244,31 @@ class SquareToroid(ThreeDimensionalShape):
             )
 
     def volume(self) -> float:
-        return self.outer_cylinder.volume() - self.inner_cylinder.volume()
+        outer_cylinder = Cylinder(self.outer_diameter, self.width)
+        inner_cylinder = Cylinder(self.inner_diameter, self.width)
+        return outer_cylinder.volume() - inner_cylinder.volume()
+
+    @classmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ) -> SquareToroid:
+        return cls(outer_diameter, width, inner_diameter)
 
 
 class NoneShape(ThreeDimensionalShape):
     def __init__(
         self,
-        outer_diameter: Optional[float],
-        width: Optional[float],
-        inner_diameter: Optional[float],
     ):
         pass
 
     def volume(self) -> None:
         return None
+
+    @classmethod
+    def from_tire_dimensions(
+        cls, outer_diameter: float, width: float, inner_diameter: float
+    ):
+        return cls()
 
 
 def create_shape(
@@ -234,9 +285,11 @@ def create_shape(
     }
 
     try:
-        shape = _shapes[geometry](outer_diameter, width, inner_diameter)
+        shape = _shapes[geometry].from_tire_dimensions(  # type:ignore
+            outer_diameter, width, inner_diameter
+        )
     except TypeError:
-        shape = NoneShape(outer_diameter, width, inner_diameter)
+        shape = NoneShape()
     except KeyError:
         raise ValueError(
             f"{geometry} is not an available shape please select one of {list(_shapes.keys())}"
