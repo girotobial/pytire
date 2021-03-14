@@ -330,6 +330,29 @@ def create_shape(
     width: Optional[float],
     inner_diameter: Optional[float],
 ) -> ThreeDimensionalShape:
+    """3D Shape factory function
+
+    Parameters
+    ----------
+    geometry : str
+        The 3D shape that you want to be bult. One of ['cuboid', 'cylinder', 'square_toroid', 'torus']
+    outer_diameter : Optional[float]
+        Outer diameter of the tire
+    width : Optional[float]
+        Width of the tire
+    inner_diameter : Optional[float]
+        Inner diameter of the tire
+
+    Returns
+    -------
+    ThreeDimensionalShape
+        Shape object
+
+    Raises
+    ------
+    ValueError
+        raised if geometry is not available.
+    """
     _shapes = {
         "cuboid": Cuboid,
         "cylinder": Cylinder,
