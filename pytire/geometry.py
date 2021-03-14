@@ -111,9 +111,9 @@ class Cylinder(ThreeDimensionalShape):
         """
         self.diameter = diameter
         self.width = width
-        self.validate_args()
+        self._validate_args()
 
-    def validate_args(
+    def _validate_args(
         self,
     ) -> None:
         args = {
@@ -149,9 +149,9 @@ class Cuboid(ThreeDimensionalShape):
         self.height = height
         self.length = length
         self.width = width
-        self.validate_args()
+        self._validate_args()
 
-    def validate_args(
+    def _validate_args(
         self,
     ) -> None:
         args = {
@@ -179,9 +179,9 @@ class CiruclarToroid(ThreeDimensionalShape):
         self.outer_diameter: float = outer_diameter
         self.width: float = width
         self.inner_diameter: float = inner_diameter
-        self.validate_args()
+        self._validate_args()
 
-    def validate_args(
+    def _validate_args(
         self,
     ) -> None:
         args = {
@@ -228,9 +228,9 @@ class SquareToroid(ThreeDimensionalShape):
         self.outer_diameter = outer_diameter
         self.width = width
         self.inner_diameter = inner_diameter
-        self.validate_args()
+        self._validate_args()
 
-    def validate_args(
+    def _validate_args(
         self,
     ) -> None:
         args = {
