@@ -74,7 +74,7 @@ class ThreeDimensionalShape(abc.ABC):
 
     @abc.abstractmethod
     def volume(self) -> Optional[float]:
-        pass
+        raise NotImplementedError
 
 
 class Cylinder(ThreeDimensionalShape):

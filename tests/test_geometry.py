@@ -15,9 +15,12 @@ from pytire.geometry import (
     CiruclarToroid,
     Cuboid,
     Cylinder,
+    NoneShape,
     SquareToroid,
+    ThreeDimensionalShape,
     circle_area,
     convert_length,
+    create_shape,
 )
 
 
@@ -106,3 +109,18 @@ def square_toroid():
 
 def test_square_toroid_volume(square_toroid):
     assert square_toroid.volume() == 7 / 2 * math.pi
+
+
+def test_create_shape_success():
+    shape = create_shape("cuboid", 1, 1, 1)
+    assert isinstance(shape, ThreeDimensionalShape)
+
+
+def test_create_shape_returns_none_shape():
+    shape = create_shape("cuboid", None, None, None)
+    assert isinstance(shape, NoneShape)
+
+
+def test_create_shape_not_a_shape():
+    with pytest.raises(ValueError):
+        create_shape("hello", 1, 1, 1)
