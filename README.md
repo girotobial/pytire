@@ -18,11 +18,21 @@ To use this library install it via pip
 $ pip install pytire
 ```
 
-import into python
+Usage
 ```python
-from pytire import Tire
+>>> from pytire import Tire
+>>> tire = Tire("34x10.75-16")
+>>> tire.diameter
+0.8636...
 
-tire = Tire("34x10.75-16")
+>>> tire.width
+0.27305...
+
+>>> tire.inner_diameter
+0.4064...
+
+>>> tire.volume()
+0.203642044328
 ```
 [The Docs are here.](https://pytire.readthedocs.io/en/latest/)
 ## Dev Setup
