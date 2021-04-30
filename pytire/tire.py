@@ -93,3 +93,19 @@ class Tire:
             geometry, self.diameter, self.width, self.wheel_diameter
         )
         return shape.volume()
+
+    @property
+    def aspect_ratio(self) -> Optional[float]:
+        """The ratio between the height of the tyre's sidewall to its width.
+
+        Returns
+        -------
+        Optional[float]
+            The aspect ratio to 3 decimal places.
+        """
+        if self.wheel_diameter is None or self.width is None or self.diameter is None:
+            return None
+
+        numerator = 0.5 * (self.diameter - self.wheel_diameter)
+
+        return round(numerator / self.width, 3)
