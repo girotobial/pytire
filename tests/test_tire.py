@@ -123,3 +123,19 @@ def test_should_calculate_torus_volume(size, expected_value):
 def test_should_calculate_square_toroid_volume(size, expected_value):
     tire = Tire(size)
     assert tire.volume(geometry="square_toroid") == pytest.approx(expected_value)
+
+
+@pytest.mark.parametrize(
+    ("size", "expected_value"),
+    [
+        ("H30x9.50-16", 0.737),
+        ("27x7.75-15", 0.774),
+        ("615x225-10", 0.802),
+        ("12.50-16", None),
+        ("18X5.5", None),
+        ("H44.5x16.5-21", 0.712),
+    ],
+)
+def test_should_calculate_aspect_ratio(size, expected_value):
+    tire = Tire(size)
+    assert tire.aspect_ratio() == pytest.approx(expected_value)
