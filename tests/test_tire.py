@@ -36,6 +36,7 @@ def test_should_call_successfully(size):
         ("18X5.5", 0.4572, 0.1397, None),
         ("12.50-16", None, 0.3175, 0.4064),
         ("H44.5x16.5-21", 1.1303, 0.4191, 0.5334),
+        ("-20", None, None, 0.507999984),
     ],
 )
 def test_should_set_attributes(size, diameter, width, wheel_diameter):
