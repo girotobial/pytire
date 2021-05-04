@@ -40,6 +40,14 @@ def test_should_convert_lengths(length, expected_result, from_, to_):
     )
 
 
+def test_should_fail_to_convert():
+    class FakeUnit:
+        name = "fake"
+
+    with pytest.raises(ValueError):
+        convert_length(1, FakeUnit, Unit.METRE)
+
+
 @pytest.mark.parametrize(
     ("radius", "area"),
     [
@@ -85,6 +93,11 @@ def torus():
     return Torus(radius_of_revolution=1.75, cross_section_radius=0.25)
 
 
+def test_should_be_invalid_torus():
+    with pytest.raises(TypeError):
+        Torus(None, None)
+
+
 def test_torus_cross_sectional_area(torus):
     assert torus.cross_section_area() == 1 / 16 * math.pi
 
@@ -100,6 +113,10 @@ def square_toroid():
 
 def test_square_toroid_volume(square_toroid):
     assert square_toroid.volume() == 7 / 2 * math.pi
+
+
+def test_none_shape_constructor():
+    NoneShape.from_tire_dimensions(0, 0, 0)
 
 
 def test_create_shape_success():
