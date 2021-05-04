@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2021-05-07
+### Added
+- Aspect ratio property
+
+### Changed
+- Updated doc strings
+
 ## [0.3.0] - 2020-03-14
 ### Added
 - 3D Shapes to handle volume calculations.
