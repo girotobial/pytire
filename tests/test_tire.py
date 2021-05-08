@@ -24,9 +24,9 @@ from pytire import Tire
 )
 def test_should_set_attributes(size, diameter, width, wheel_diameter):
     tire = Tire(size)
-    assert tire.diameter == pytest.approx(diameter)
+    assert tire.outer_diameter == pytest.approx(diameter)
     assert tire.width == pytest.approx(width)
-    assert tire.wheel_diameter == pytest.approx(wheel_diameter)
+    assert tire.rim_diameter == pytest.approx(wheel_diameter)
 
 
 @pytest.mark.integration

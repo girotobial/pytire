@@ -35,7 +35,7 @@ class Tire:
         return self._size.__str__()
 
     @property
-    def diameter(self) -> Optional[float]:
+    def outer_diameter(self) -> Optional[float]:
         """Tire diameter in metres"""
         return self._size.outer_diameter
 
@@ -45,7 +45,7 @@ class Tire:
         return self._size.width
 
     @property
-    def wheel_diameter(self) -> Optional[float]:
+    def rim_diameter(self) -> Optional[float]:
         """Wheel diameter in metres"""
         return self._size.rim_diameter
 
