@@ -47,24 +47,9 @@ class Size(metaclass=abc.ABCMeta):
         return shape.volume()
 
     @property
+    @abc.abstractmethod
     def aspect_ratio(self) -> Optional[float]:
-        """The ratio between the height of the tyre's sidewall to its width.
-
-        Returns
-        -------
-        Optional[float]
-            The aspect ratio to 3 decimal places.
-        """
-        if (
-            self.outer_diameter is None
-            or self.width is None
-            or self.rim_diameter is None
-        ):
-            return None
-
-        numerator = 0.5 * (self.outer_diameter - self.rim_diameter)
-
-        return round(numerator / self.width, 3)
+        raise NotImplementedError
 
     @abc.abstractmethod
     def __str__(self) -> str:
@@ -110,6 +95,26 @@ class AircraftSize(Size):
         wheel_diameter = float(match.group(0))
         return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)
 
+    @property
+    def aspect_ratio(self) -> Optional[float]:
+        """The ratio between the height of the tyre's sidewall to its width.
 
-def size_factory(size_string: str) -> Size:
+        Returns
+        -------
+        Optional[float]
+            The aspect ratio to 3 decimal places.
+        """
+        if (
+            self.outer_diameter is None
+            or self.width is None
+            or self.rim_diameter is None
+        ):
+            return None
+
+        numerator = 0.5 * (self.outer_diameter - self.rim_diameter)
+
+        return round(numerator / self.width, 3)
+
+
+def get_size(size_string: str) -> Size:
     return AircraftSize(size_string)

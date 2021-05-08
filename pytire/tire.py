@@ -6,7 +6,7 @@
 
 from typing import Optional
 
-from pytire.size import size_factory
+from pytire.size import get_size
 
 
 class Tire:
@@ -28,7 +28,7 @@ class Tire:
             Size code as would be displayed on the sidewall.
             E.g 'H45.5x16.5-21', '30x10.75-16', '615x225-10'
         """
-        self._size = size_factory(size)
+        self._size = get_size(size_string=size)
 
     @property
     def size(self) -> str:
