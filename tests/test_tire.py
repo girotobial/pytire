@@ -10,6 +10,13 @@ from pytire import Tire
 
 
 @pytest.mark.integration
+def test_should_return_size_string():
+    SIZE_STRING = "34x10.75-16"
+    tire = Tire(SIZE_STRING)
+    assert tire.size == SIZE_STRING
+
+
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "diameter", "width", "wheel_diameter"),
     [

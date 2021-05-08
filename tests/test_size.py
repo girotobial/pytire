@@ -28,6 +28,13 @@ def test_should_construct_aircraft_size(size):
 
 
 @pytest.mark.unit
+def test_should_return_size_string():
+    SIZE_STRING = "34x10.75-16"
+    size_instance = AircraftSize(SIZE_STRING)
+    assert str(size_instance) == SIZE_STRING
+
+
+@pytest.mark.unit
 @pytest.mark.parametrize(
     ("size", "expected_unit"),
     [
