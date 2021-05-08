@@ -24,6 +24,7 @@ from pytire.geometry import (
 )
 
 
+@pytest.mark.unit
 @pytest.mark.parametrize(
     ("length", "from_", "to_", "expected_result"),
     [
@@ -40,6 +41,7 @@ def test_should_convert_lengths(length, expected_result, from_, to_):
     )
 
 
+@pytest.mark.unit
 def test_should_fail_to_convert():
     class FakeUnit:
         name = "fake"
@@ -48,6 +50,7 @@ def test_should_fail_to_convert():
         convert_length(1, FakeUnit, Unit.METRE)
 
 
+@pytest.mark.unit
 @pytest.mark.parametrize(
     ("radius", "area"),
     [
@@ -64,10 +67,12 @@ def cylinder():
     return Cylinder(diameter=4, width=2)
 
 
+@pytest.mark.unit
 def test_cylinder_radius(cylinder):
     assert cylinder.radius == 2
 
 
+@pytest.mark.unit
 def test_cylinder_volume(cylinder):
     assert cylinder.volume() == 8 * math.pi
 
@@ -77,10 +82,12 @@ def cuboid():
     return Cuboid(height=4, length=4, width=2)
 
 
+@pytest.mark.unit
 def test_cuboid_volume(cuboid):
     assert cuboid.volume() == 32
 
 
+@pytest.mark.unit
 def test_cuboid_from_tyre():
     cuboid = Cuboid.from_tire_dimensions(4, 3, 2)
     assert cuboid.height == 4
@@ -93,15 +100,18 @@ def torus():
     return Torus(radius_of_revolution=1.75, cross_section_radius=0.25)
 
 
+@pytest.mark.unit
 def test_should_be_invalid_torus():
     with pytest.raises(TypeError):
         Torus(None, None)
 
 
+@pytest.mark.unit
 def test_torus_cross_sectional_area(torus):
     assert torus.cross_section_area() == 1 / 16 * math.pi
 
 
+@pytest.mark.unit
 def test_torus_volume(torus):
     assert torus.volume() == math.pi ** 2 / 4 * (2 + 1.5) * (2 - 1.5) ** 2
 
@@ -111,24 +121,34 @@ def square_toroid():
     return SquareToroid(outer_diameter=4, width=2, inner_diameter=3)
 
 
+@pytest.mark.unit
 def test_square_toroid_volume(square_toroid):
     assert square_toroid.volume() == 7 / 2 * math.pi
 
 
+@pytest.mark.unit
 def test_none_shape_constructor():
     NoneShape.from_tire_dimensions(0, 0, 0)
 
 
+@pytest.mark.unit
+def test_none_shape_volume():
+    assert NoneShape().volume() is None
+
+
+@pytest.mark.unit
 def test_create_shape_success():
     shape = create_shape("cuboid", 1, 1, 1)
     assert isinstance(shape, ThreeDimensionalShape)
 
 
+@pytest.mark.unit
 def test_create_shape_returns_none_shape():
     shape = create_shape("cuboid", None, None, None)
     assert isinstance(shape, NoneShape)
 
 
+@pytest.mark.unit
 def test_create_shape_not_a_shape():
     with pytest.raises(ValueError):
         create_shape("hello", 1, 1, 1)

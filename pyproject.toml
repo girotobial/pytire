@@ -40,6 +40,12 @@ sphinx-autoapi = "^1.7.0"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.pytest.ini_options]
+markers = [
+    "unit",
+    "integration",
+]
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]

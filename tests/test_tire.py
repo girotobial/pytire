@@ -27,6 +27,7 @@ def test_should_call_successfully(size):
     assert tire.size == size
 
 
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "diameter", "width", "wheel_diameter"),
     [
@@ -46,6 +47,7 @@ def test_should_set_attributes(size, diameter, width, wheel_diameter):
     assert tire.wheel_diameter == pytest.approx(wheel_diameter)
 
 
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "expected_unit"),
     [
@@ -94,6 +96,7 @@ def test_should_calculate_cylinder_volume(size, expected_value):
     assert tire.volume(geometry="cylinder") == pytest.approx(expected_value)
 
 
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
@@ -110,6 +113,7 @@ def test_should_calculate_torus_volume(size, expected_value):
     assert tire.volume(geometry="torus") == pytest.approx(expected_value)
 
 
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
@@ -126,6 +130,7 @@ def test_should_calculate_square_toroid_volume(size, expected_value):
     assert tire.volume(geometry="square_toroid") == pytest.approx(expected_value)
 
 
+@pytest.mark.integration
 @pytest.mark.parametrize(
     ("size", "expected_value"),
     [
