@@ -7,7 +7,9 @@
 import pytest
 
 from pytire.enums import Unit
-from pytire.size import AircraftSize, Size
+from pytire.size import AircraftSize, RoadSize, Size, get_size
+
+# AircraftTire tests
 
 
 @pytest.mark.unit
@@ -83,3 +85,60 @@ def test_should_calculate_cuboid_volume(size, expected_value):
 def test_should_calculate_cylinder_volume(size, expected_value):
     size = AircraftSize(size)
     assert size.volume(geometry="cylinder") == pytest.approx(expected_value)
+
+
+# RoadSize tests
+@pytest.fixture
+def roadsize_str() -> str:
+    return "205/55R16"
+
+
+@pytest.fixture
+def roadsize(roadsize_str) -> RoadSize:
+    return RoadSize(roadsize_str)
+
+
+@pytest.mark.unit
+def test_should_construct_roadsize(roadsize_str):
+    tire = RoadSize(roadsize)
+    assert isinstance(tire, RoadSize)
+
+
+@pytest.mark.unit
+def test_should_return_roadsize_outer_diameter(roadsize):
+    assert roadsize.outer_diameter == pytest.approx(0.315)
+
+
+def test_should_return_roadsize_rim_diameter(roadsize):
+    assert roadsize.rim_diameter == pytest.approx(0.4064)
+
+
+@pytest.mark.unit
+def test_should_return_roadsize_width(roadsize):
+    assert roadsize.width == pytest.approx(0.205)
+
+
+@pytest.mark.unit
+def test_should_return_roadsize_aspect_ratio(roadsize):
+    assert roadsize.aspect_ratio == pytest.approx(0.65)
+
+
+# get_size tests
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    ("size_string", "expected_instance"),
+    [
+        ("H30x9.50-16", AircraftSize),
+        ("27x7.75-15", AircraftSize),
+        ("615x225-10", AircraftSize),
+        ("615x225R10", AircraftSize),
+        ("12.50-16", AircraftSize),
+        ("18X5.5", AircraftSize),
+        ("H44.5x16.5-21", AircraftSize),
+        ("H44.5x16.5R21", AircraftSize),
+        ("205/55R16", RoadSize),
+    ],
+)
+def test_should_return_instance(size_string, expected_instance):
+    size = get_size(size_string)
+    assert isinstance(size, expected_instance)
