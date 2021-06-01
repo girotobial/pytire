@@ -34,6 +34,9 @@ class Tire:
         self.size = size
         self.unit = Unit.MILLIMETRE if re.match(METRIC_RE, self.size) else Unit.INCH
 
+    def __repr__(self) -> str:
+        return f"Tire(size={self.size})"
+
     @property
     def diameter(self) -> Optional[float]:
         """Tire diameter in metres"""
