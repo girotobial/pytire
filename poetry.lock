@@ -207,7 +207,7 @@ cognitive_complexity = "*"
 
 [[package]]
 name = "flake8-comprehensions"
-version = "3.3.1"
+version = "3.5.0"
 description = "A flake8 plugin to help you write better list/set/dict comprehensions."
 category = "dev"
 optional = false
@@ -862,7 +862,7 @@ testing = ["pytest (>=3.5,!=3.7.3)", "pytest-checkdocs (>=1.2.3)", "pytest-flake
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "d6e98f1b2da2eca5ecd598336cb92c6acfc6edf44cbc573f268b75fb762d94c0"
+content-hash = "014b258e7964d2b40ef2b0fd1b8d7cdabae1a7cb98776e8b369e83a6d03fa8df"
 
 [metadata.files]
 alabaster = [
@@ -990,8 +990,8 @@ flake8-cognitive-complexity = [
     {file = "flake8_cognitive_complexity-0.1.0.tar.gz", hash = "sha256:f202df054e4f6ff182b659c261922b9c684628a47beb19cb0973c50d6a7831c1"},
 ]
 flake8-comprehensions = [
-    {file = "flake8-comprehensions-3.3.1.tar.gz", hash = "sha256:e734bf03806bb562886d9bf635d23a65a1a995c251b67d7e007a7b608af9bd22"},
-    {file = "flake8_comprehensions-3.3.1-py3-none-any.whl", hash = "sha256:6d80dfafda0d85633f88ea5bc7de949485f71f1e28db7af7719563fe5f62dcb1"},
+    {file = "flake8-comprehensions-3.5.0.tar.gz", hash = "sha256:f24be9032587127f7a5bc6d066bf755b6e66834f694383adb8a673e229c1f559"},
+    {file = "flake8_comprehensions-3.5.0-py3-none-any.whl", hash = "sha256:b07aef3277623db32310aa241a1cec67212b53c1d18e767d7e26d4d83aa05bf7"},
 ]
 flake8-ownership = [
     {file = "flake8-ownership-2.0.1.tar.gz", hash = "sha256:287d40027b6f1c888348316a6b5c6d105f6d7321a04c8ad40e7d211e76014b58"},
