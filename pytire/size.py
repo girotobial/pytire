@@ -27,6 +27,11 @@ class Size(metaclass=abc.ABCMeta):
     def rim_diameter(self) -> Optional[float]:
         raise NotImplementedError
 
+    @property
+    @abc.abstractmethod
+    def aspect_ratio(self) -> Optional[float]:
+        raise NotImplementedError
+
     def volume(self, geometry: str = "cuboid") -> Optional[float]:
         """The exterior volume of the tire.
 
@@ -46,23 +51,17 @@ class Size(metaclass=abc.ABCMeta):
         )
         return shape.volume()
 
-    @property
-    @abc.abstractmethod
-    def aspect_ratio(self) -> Optional[float]:
-        raise NotImplementedError
+    def __repr__(self):
+        return f"{type(self).__name__}({self._size})"
 
-    @abc.abstractmethod
-    def __str__(self) -> str:
-        raise NotImplementedError
+    def __str__(self):
+        return f"{self._size}"
 
 
 class AircraftSize(Size):
     def __init__(self, size: str):
         self._size = size
         self.unit = Unit.MILLIMETRE if re.match(METRIC_RE, self._size) else Unit.INCH
-
-    def __str__(self) -> str:
-        return self._size
 
     @property
     def outer_diameter(self) -> Optional[float]:
@@ -114,6 +113,11 @@ class AircraftSize(Size):
         numerator = 0.5 * (self.outer_diameter - self.rim_diameter)
 
         return round(numerator / self.width, 3)
+
+
+class RoadSize(Size):
+    def __init__(self, size: str):
+        self._size = size
 
 
 def get_size(size_string: str) -> Size:
