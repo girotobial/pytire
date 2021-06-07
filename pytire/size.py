@@ -2,12 +2,21 @@ import abc
 import re
 from typing import Optional
 
-from pytire.constant import DIAMETER_RE, METRIC_RE, WHEEL_DIAMETER_RE, WIDTH_RE
+from pytire.constant import (
+    ASPECT_RATIO_RE,
+    DIAMETER_RE,
+    METRIC_RE,
+    ROAD_TIRE_WIDTH_RE,
+    WHEEL_DIAMETER_RE,
+    WIDTH_RE,
+)
 from pytire.enums import Unit
 from pytire.geometry import ThreeDimensionalShape, convert_length, create_shape
 
 
 class Size(metaclass=abc.ABCMeta):
+    _code = ""
+
     @abc.abstractmethod
     def __init__(self, code: str):
         raise NotImplementedError
@@ -23,9 +32,15 @@ class Size(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @property
-    @abc.abstractmethod
     def rim_diameter(self) -> Optional[float]:
-        raise NotImplementedError
+        """Rim diameter in metres"""
+
+        match = re.search(WHEEL_DIAMETER_RE, self._code)
+        if match is None:
+            return match
+
+        wheel_diameter = float(match.group(0))
+        return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)
 
     @property
     @abc.abstractmethod
@@ -84,17 +99,6 @@ class AircraftSize(Size):
         return convert_length(width, self.unit, Unit.METRE)
 
     @property
-    def rim_diameter(self) -> Optional[float]:
-        """Rim diameter in metres"""
-
-        match = re.search(WHEEL_DIAMETER_RE, self._code)
-        if match is None:
-            return match
-
-        wheel_diameter = float(match.group(0))
-        return convert_length(wheel_diameter, Unit.INCH, Unit.METRE)
-
-    @property
     def aspect_ratio(self) -> Optional[float]:
         """The ratio between the height of the tyre's sidewall to its width.
 
@@ -118,22 +122,30 @@ class AircraftSize(Size):
 class RoadSize(Size):
     def __init__(self, code: str):
         self._code = code
+        self.unit = Unit.MILLIMETRE
 
     @property
     def aspect_ratio(self) -> Optional[float]:
-        return super().aspect_ratio
+        match = re.search(ASPECT_RATIO_RE, self._code)
+        if match is None:
+            return match
+
+        return float(match.group(0)) / 100
 
     @property
     def outer_diameter(self) -> Optional[float]:
-        return super().outer_diameter
-
-    @property
-    def rim_diameter(self) -> Optional[float]:
-        return super().rim_diameter
+        if self.width is None or self.aspect_ratio is None:
+            return None
+        return round(self.width / self.aspect_ratio, 3)
 
     @property
     def width(self) -> Optional[float]:
-        return super().width
+        match = re.search(ROAD_TIRE_WIDTH_RE, self._code)
+        if match is None:
+            return match
+
+        width = float(match.group(0))
+        return convert_length(width, self.unit, Unit.METRE)
 
 
 def get_size(size_string: str) -> Size:

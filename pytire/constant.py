@@ -15,3 +15,7 @@ METRIC_RE = r"\d{3}[xX]\d{3}-\d+"  # noqa not an f-string
 DIAMETER_RE = r"\d+[(\.\d)]+(?=[xX])"
 WIDTH_RE = r"(?<=[xX])\d+[(\.\d)]+(?=-)|\d+[(\.\d)]+(?=-)|(?<=[xX])\d+[(\.\d)]+"
 WHEEL_DIAMETER_RE = r"(?<=[-rR])\d+[(\.\d)]+"
+
+# Road tire regexs
+ASPECT_RATIO_RE = r"(?<=\/)\d{2}"  # noqa not an f-string
+ROAD_TIRE_WIDTH_RE = r"\d+[\.\d]+(?=[\/])"

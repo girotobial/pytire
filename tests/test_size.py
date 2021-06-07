@@ -100,13 +100,13 @@ def roadsize(roadsize_str) -> RoadSize:
 
 @pytest.mark.unit
 def test_should_construct_roadsize(roadsize_str):
-    tire = RoadSize(roadsize)
+    tire = RoadSize(roadsize_str)
     assert isinstance(tire, RoadSize)
 
 
 @pytest.mark.unit
 def test_should_return_roadsize_outer_diameter(roadsize):
-    assert roadsize.outer_diameter == pytest.approx(0.315)
+    assert roadsize.outer_diameter == pytest.approx(0.373)
 
 
 def test_should_return_roadsize_rim_diameter(roadsize):
@@ -120,7 +120,7 @@ def test_should_return_roadsize_width(roadsize):
 
 @pytest.mark.unit
 def test_should_return_roadsize_aspect_ratio(roadsize):
-    assert roadsize.aspect_ratio == pytest.approx(0.65)
+    assert roadsize.aspect_ratio == pytest.approx(0.55)
 
 
 # get_size tests
