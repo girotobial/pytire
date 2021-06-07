@@ -1,3 +1,11 @@
+"""
+Handling size sidewall markings
+
+:author: Alex Robinson <girotobial@gmail.com>
+:copyright: Copyright (c) Alex Robinson, 2021-2021.
+:license: MIT
+"""
+
 import abc
 import re
 from typing import Optional
