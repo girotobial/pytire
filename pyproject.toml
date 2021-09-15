@@ -16,7 +16,7 @@ classifiers = [
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
-flake8 = "^3.8.4"
+flake8 = "^3.9.2"
 pytest = "^6.2.4"
 mypy = "^0.902"
 tox = "^3.22.0"
@@ -34,7 +34,7 @@ pre-commit = "^2.13.0"
 flake8-ownership = "^2.0.1"
 sphinx-rtd-theme = "^0.5.1"
 m2r2 = "^0.2.7"
-sphinx-autoapi = "^1.7.0"
+sphinx-autoapi = "^1.8.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
