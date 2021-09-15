@@ -32,7 +32,7 @@ flake8-use-fstring = "^1.1"
 Sphinx = "^4.0.2"
 pre-commit = "^2.13.0"
 flake8-ownership = "^2.0.1"
-sphinx-rtd-theme = "^0.5.1"
+sphinx-rtd-theme = "^1.0.0"
 m2r2 = "^0.2.7"
 sphinx-autoapi = "^1.7.0"
 
