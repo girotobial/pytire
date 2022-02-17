@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytire"
-version = "0.4.0"
+version = "0.4.1"
 description = "Python library to handle tire attributes."
 authors = ["girotobial <abrobinson1907@gmail.com>"]
 license = "MIT"
