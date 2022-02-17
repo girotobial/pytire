@@ -48,3 +48,4 @@ envlist = py37, py38, py39
 [testenv]
 deps = pytest >= 3.0.0, <4
 commands = pytest
+"""
